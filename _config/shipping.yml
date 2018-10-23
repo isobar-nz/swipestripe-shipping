@@ -1,0 +1,8 @@
+---
+Name: swipestripe-shipping
+Before:
+- '#modules-other'
+---
+SilverStripe\Core\Manifest\ModuleManifest:
+  module_priority:
+  - swipestripe/swipestripe-shipping
