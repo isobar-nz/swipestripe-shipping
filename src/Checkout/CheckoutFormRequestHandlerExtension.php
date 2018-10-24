@@ -17,10 +17,10 @@ use SwipeStripe\Shipping\Order\OrderExtension;
 class CheckoutFormRequestHandlerExtension extends Extension
 {
     /**
-     * @param array $data
      * @param CheckoutForm|CheckoutFormExtension $form
+     * @param array $data
      */
-    public function beforeInitPayment(array $data, CheckoutForm $form): void
+    public function beforeInitPayment(CheckoutForm $form, array $data): void
     {
         // Order specific shipping address handled by saveInto()
         if ($form->shippingAddressSameAsBillingAddress()) {
