@@ -14,7 +14,6 @@ use SwipeStripe\Price\DBPrice;
 /**
  * Class ShippingZone
  * @package SwipeStripe\Shipping
- * @property bool $IsDefault
  * @property DBPrice $Price
  * @property DBPrice $FreeOver
  * @property int $ShippingServiceID
@@ -33,7 +32,6 @@ class ShippingZone extends DataObject
      * @var array
      */
     private static $db = [
-        'IsDefault' => 'Boolean',
         'Price'     => 'Price',
         'FreeOver'  => 'Price',
     ];
@@ -73,7 +71,6 @@ class ShippingZone extends DataObject
     private static $searchable_fields = [
         'ShippingService.Title',
         'ShippingRegions.Title',
-        'IsDefault',
     ];
 
     /**
@@ -83,7 +80,6 @@ class ShippingZone extends DataObject
         'ShippingService.Title' => 'Shipping Service',
         'Price.Value'           => 'Price',
         'ShippingRegions.Count' => 'Regions',
-        'IsDefault.Nice'        => 'Default',
     ];
 
     /**
@@ -96,8 +92,7 @@ class ShippingZone extends DataObject
         return static::get()->filter([
             'ShippingRegions.ID' => $regionID,
             'ShippingServiceID'  => $serviceID,
-        ])->sort('IsDefault', 'ASC')
-            ->first();
+        ])->first();
     }
 
     /**
@@ -121,7 +116,6 @@ class ShippingZone extends DataObject
             ShippingService::singleton()->requireDefaultRecords();
 
             $defaultZone = static::create();
-            $defaultZone->IsDefault = true;
             $defaultZone->ShippingServiceID = DataObject::get_one(ShippingService::class)->ID;
             $defaultZone->write();
 
