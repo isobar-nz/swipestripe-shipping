@@ -82,6 +82,20 @@ class ShippingZone extends DataObject
     ];
 
     /**
+     * @param int $regionID
+     * @param int $serviceID
+     * @return null|ShippingZone
+     */
+    public static function getForRegionAndService(int $regionID, int $serviceID): ?self
+    {
+        return static::get()->filter([
+            'ShippingRegions.ID' => $regionID,
+            'ShippingServiceID'  => $serviceID,
+        ])->sort('IsDefault', 'ASC')
+            ->first();
+    }
+
+    /**
      * @inheritDoc
      */
     public function getTitle()

@@ -31,4 +31,21 @@ class OrderExtension extends DataExtension
         $fields->removeFieldFromTab('Root.Main', 'ShippingAddress');
         $fields->insertAfter('BillingAddress', $this->owner->ShippingAddress->scaffoldFormField());
     }
+
+    /**
+     * @return ShippingAddOn
+     */
+    public function getShippingAddOn(): ShippingAddOn
+    {
+        $existing = $this->owner->OrderAddOns()->find('ClassName', ShippingAddOn::class);
+
+        if ($existing !== null) {
+            return $existing;
+        }
+
+        $new = ShippingAddOn::create();
+        $new->OrderID = $this->owner->ID;
+
+        return $new;
+    }
 }
