@@ -3,9 +3,12 @@ declare(strict_types=1);
 
 namespace SwipeStripe\Shipping;
 
+use Money\Money;
+use SilverStripe\Forms\FieldList;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\ORM\ManyManyList;
 use SilverStripe\Versioned\Versioned;
+use SwipeStripe\Order\Order;
 use SwipeStripe\Price\DBPrice;
 
 /**
@@ -13,6 +16,7 @@ use SwipeStripe\Price\DBPrice;
  * @package SwipeStripe\Shipping
  * @property bool $IsDefault
  * @property DBPrice $Price
+ * @property DBPrice $FreeOver
  * @property int $ShippingServiceID
  * @method ShippingService ShippingService()
  * @method ManyManyList|ShippingRegion[] ShippingRegions()
@@ -31,6 +35,7 @@ class ShippingZone extends DataObject
     private static $db = [
         'IsDefault' => 'Boolean',
         'Price'     => 'Price',
+        'FreeOver'  => 'Price',
     ];
 
     /**
@@ -122,5 +127,34 @@ class ShippingZone extends DataObject
 
             $defaultZone->ShippingRegions()->addMany(ShippingRegion::get());
         }
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getCMSFields()
+    {
+        $this->beforeUpdateCMSFields(function (FieldList $fields) {
+            $fields->dataFieldByName('FreeOver')->setDescription('Set to a positive amount to make ' .
+                'shipping free over a certain amount. Set as zero or negative to disable free shipping over $x for ' .
+                'this zone.');
+        });
+
+        return parent::getCMSFields();
+    }
+
+    /**
+     * @param Order $order
+     * @return DBPrice
+     */
+    public function PriceForOrder(Order $order): DBPrice
+    {
+        $orderSubTotal = $order->SubTotal()->getMoney();
+        $zoneFreeOver = $this->FreeOver->getMoney();
+
+        return $zoneFreeOver->isPositive() && $orderSubTotal->greaterThanOrEqual($zoneFreeOver)
+            ? DBPrice::create_field(DBPrice::INJECTOR_SPEC,
+                new Money(0, $this->Price->getMoney()->getCurrency()))
+            : $this->Price;
     }
 }

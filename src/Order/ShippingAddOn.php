@@ -43,7 +43,7 @@ class ShippingAddOn extends OrderAddOn
         ]);
         $this->ShippingRegionID = $regionId;
         $this->ShippingServiceID = $shippingZone->ShippingServiceID;
-        $this->Amount->setValue($shippingZone->Price);
+        $this->Amount->setValue($shippingZone->PriceForOrder($this->Order()));
 
         return $this;
     }
