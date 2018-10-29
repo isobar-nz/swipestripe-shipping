@@ -5,10 +5,14 @@ namespace SwipeStripe\Shipping\Checkout;
 
 use SilverStripe\Control\HTTPResponse;
 use SilverStripe\Core\Extension;
+use SilverStripe\ORM\ValidationException;
+use SilverStripe\ORM\ValidationResult;
 use SwipeStripe\Order\Checkout\CheckoutForm;
 use SwipeStripe\Order\Checkout\CheckoutFormRequestHandler;
 use SwipeStripe\Order\Order;
 use SwipeStripe\Shipping\Order\OrderExtension;
+use SwipeStripe\Shipping\ShippingRegion;
+use SwipeStripe\Shipping\ShippingService;
 use SwipeStripe\Shipping\ShippingZone;
 
 /**
@@ -44,6 +48,18 @@ class CheckoutFormRequestHandlerExtension extends Extension
     protected function updateShippingAddOn(Order $cart, int $regionId, int $serviceId): void
     {
         $shippingZone = ShippingZone::getForRegionAndService($regionId, $serviceId);
+
+        if ($shippingZone === null) {
+            throw new ValidationException(ValidationResult::create()
+                ->addFieldError(CheckoutFormExtension::SHIPPING_SERVICE_FIELD,
+                    _t(CheckoutFormValidatorExtension::class . '.SHIPPING_SERVICE_UNAVAILABLE',
+                        'Sorry, {service} is not available in {region}.',
+                        [
+                            'region'  => ShippingRegion::get_by_id($regionId)->Title,
+                            'service' => ShippingService::get_by_id($serviceId)->Title,
+                        ])));
+        }
+
         $cart->getShippingAddOn()
             ->updateWithZone($shippingZone, $regionId)
             ->write();
