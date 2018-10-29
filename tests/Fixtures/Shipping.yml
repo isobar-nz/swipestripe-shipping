@@ -1,0 +1,34 @@
+SwipeStripe\Shipping\ShippingService:
+  standard:
+    Title: Standard
+
+  expedited:
+    Title: Expedited
+
+SwipeStripe\Shipping\ShippingRegion:
+  north:
+    Title: North
+
+  south:
+    Title: South
+
+  east:
+    Title: East
+
+  west:
+    Title: West
+
+SwipeStripe\Shipping\ShippingZone:
+  standard:
+    PriceAmount: 500 # $5
+    PriceCurrency: NZD
+    FreeOverAmount: 5000 # $50
+    FreeOverCurrency: NZD
+    ShippingService: =>SwipeStripe\Shipping\ShippingService.standard
+    ShippingRegions: =>SwipeStripe\Shipping\ShippingRegion.north, =>SwipeStripe\Shipping\ShippingRegion.south, =>SwipeStripe\Shipping\ShippingRegion.east, =>SwipeStripe\Shipping\ShippingRegion.west
+
+  expedited:
+    PriceAmount: 1500 # $15
+    PriceCurrency: NZD
+    ShippingService: =>SwipeStripe\Shipping\ShippingService.expedited
+    ShippingRegions: =>SwipeStripe\Shipping\ShippingRegion.north
