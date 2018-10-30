@@ -61,7 +61,7 @@ class ShippingAddOnTest extends SapphireTest
         $addOn->updateWithZone($this->standardZone, $northId);
 
         $this->assertSame($northId, $addOn->ShippingRegion()->ID);
-        $this->assertSame($this->standardZone->ShippingServiceID, $addOn->ShippingService()->ID);
+        $this->assertSame($this->standardZone->ID, $addOn->ShippingZone()->ID);
 
         $this->assertTrue($addOn->Amount->getMoney()->equals(
             $this->standardZone->PriceForOrder($order)->getMoney()
