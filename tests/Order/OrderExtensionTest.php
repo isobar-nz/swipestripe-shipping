@@ -7,6 +7,7 @@ use SilverStripe\Dev\SapphireTest;
 use SwipeStripe\Order\Order;
 use SwipeStripe\Shipping\Order\OrderExtension;
 use SwipeStripe\Shipping\Order\ShippingAddOn;
+use SwipeStripe\Shipping\Tests\NeedsSupportedCurrencies;
 
 /**
  * Class OrderExtensionTest
@@ -14,10 +15,21 @@ use SwipeStripe\Shipping\Order\ShippingAddOn;
  */
 class OrderExtensionTest extends SapphireTest
 {
+    use NeedsSupportedCurrencies;
+
     /**
      * @var bool
      */
     protected $usesDatabase = true;
+
+    /**
+     * @inheritDoc
+     */
+    public static function setUpBeforeClass()
+    {
+        parent::setUpBeforeClass();
+        static::setupSupportedCurrencies();
+    }
 
     /**
      *

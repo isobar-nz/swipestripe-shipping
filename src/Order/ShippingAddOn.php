@@ -4,17 +4,17 @@ declare(strict_types=1);
 namespace SwipeStripe\Shipping\Order;
 
 use SwipeStripe\Order\OrderAddOn;
+use SwipeStripe\Price\DBPrice;
 use SwipeStripe\Shipping\ShippingRegion;
-use SwipeStripe\Shipping\ShippingService;
 use SwipeStripe\Shipping\ShippingZone;
 
 /**
  * Class ShippingAddOn
  * @package SwipeStripe\Shipping\Order
  * @property int $ShippingRegionID
- * @property int $ShippingServiceID
- * @method ShippingService ShippingService()
+ * @property int $ShippingZoneID
  * @method ShippingRegion ShippingRegion()
+ * @method ShippingZone ShippingZone()
  */
 class ShippingAddOn extends OrderAddOn
 {
@@ -27,8 +27,8 @@ class ShippingAddOn extends OrderAddOn
      * @var array
      */
     private static $has_one = [
-        'ShippingRegion'  => ShippingRegion::class,
-        'ShippingService' => ShippingService::class,
+        'ShippingRegion' => ShippingRegion::class,
+        'ShippingZone'   => ShippingZone::class,
     ];
 
     /**
@@ -42,9 +42,16 @@ class ShippingAddOn extends OrderAddOn
             'service' => $shippingZone->ShippingService()->Title,
         ]);
         $this->ShippingRegionID = $regionId;
-        $this->ShippingServiceID = $shippingZone->ShippingServiceID;
-        $this->Amount->setValue($shippingZone->PriceForOrder($this->Order()));
+        $this->ShippingZoneID = $shippingZone->ID;
 
         return $this;
+    }
+
+    /**
+     * @return DBPrice
+     */
+    public function getAmount(): DBPrice
+    {
+        return $this->ShippingZone()->PriceForOrder($this->Order());
     }
 }
