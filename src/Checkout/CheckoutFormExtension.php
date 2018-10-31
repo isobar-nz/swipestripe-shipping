@@ -44,7 +44,7 @@ class CheckoutFormExtension extends Extension
                 $shippingAddOn->ShippingRegionID));
         $fields->insertAfter(static::SHIPPING_REGION_FIELD,
             DropdownField::create(static::SHIPPING_SERVICE_FIELD, 'Shipping Service', ShippingService::get(),
-                $shippingAddOn->ShippingServiceID));
+                $shippingAddOn->ShippingZone()->ShippingServiceID));
     }
 
     /**
