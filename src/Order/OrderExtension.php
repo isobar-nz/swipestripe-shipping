@@ -5,8 +5,8 @@ namespace SwipeStripe\Shipping\Order;
 
 use SilverStripe\Forms\FieldList;
 use SilverStripe\ORM\DataExtension;
+use SwipeStripe\Address\DBAddress;
 use SwipeStripe\Order\Order;
-use SwipeStripe\ORM\FieldType\DBAddress;
 
 /**
  * Class OrderExtension
