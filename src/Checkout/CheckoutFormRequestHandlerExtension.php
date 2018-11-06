@@ -72,6 +72,20 @@ class CheckoutFormRequestHandlerExtension extends Extension
      */
     public function UpdateShipping(array $data, CheckoutFormInterface $form): HTTPResponse
     {
+        if (!$form->getCart()->IsMutable()) {
+            // If the cart was locked due to trying to pay, then checkout was clicked again
+            // This stops being able to create multiple active checkouts on one order
+            $original = $form->getCart();
+            $clone = $original->duplicate();
+            $clone->Unlock();
+
+            if ($original->ID === $this->owner->ActiveCart->ID) {
+                $this->owner->setActiveCart($clone);
+            }
+
+            $form->setCart($clone);
+        }
+
         $this->updateShippingAddOn($form->getCart(), intval($data[CheckoutFormExtension::SHIPPING_REGION_FIELD]),
             intval($data[CheckoutFormExtension::SHIPPING_SERVICE_FIELD]));
 

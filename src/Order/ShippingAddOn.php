@@ -38,6 +38,10 @@ class ShippingAddOn extends OrderAddOn
      */
     public function updateWithZone(ShippingZone $shippingZone, int $regionId): self
     {
+        if (!$this->Order()->IsMutable()) {
+            throw new \BadMethodCallException('Cart must be mutable to update shipping add-on.');
+        }
+
         $this->Title = _t(self::class . '.ORDER_ENTRY', 'Shipping - {service}', [
             'service' => $shippingZone->ShippingService()->Title,
         ]);
