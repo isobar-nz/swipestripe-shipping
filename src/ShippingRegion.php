@@ -71,6 +71,7 @@ class ShippingRegion extends DataObject
 
     /**
      * @inheritdoc
+     * @codeCoverageIgnore
      */
     public function getCMSFields()
     {

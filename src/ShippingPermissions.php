@@ -16,6 +16,7 @@ final class ShippingPermissions implements PermissionProvider
 
     /**
      * @inheritDoc
+     * @codeCoverageIgnore
      */
     public function providePermissions(): array
     {

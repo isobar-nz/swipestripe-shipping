@@ -25,6 +25,7 @@ class OrderExtension extends DataExtension
 
     /**
      * @param FieldList $fields
+     * @codeCoverageIgnore
      */
     public function updateCMSFields(FieldList $fields)
     {
