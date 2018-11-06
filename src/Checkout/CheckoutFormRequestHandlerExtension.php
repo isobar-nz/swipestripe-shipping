@@ -7,7 +7,7 @@ use SilverStripe\Control\HTTPResponse;
 use SilverStripe\Core\Extension;
 use SilverStripe\ORM\ValidationException;
 use SilverStripe\ORM\ValidationResult;
-use SwipeStripe\Order\Checkout\CheckoutForm;
+use SwipeStripe\Order\Checkout\CheckoutFormInterface;
 use SwipeStripe\Order\Checkout\CheckoutFormRequestHandler;
 use SwipeStripe\Order\Order;
 use SwipeStripe\Shipping\Order\OrderExtension;
@@ -23,10 +23,10 @@ use SwipeStripe\Shipping\ShippingZone;
 class CheckoutFormRequestHandlerExtension extends Extension
 {
     /**
-     * @param CheckoutForm|CheckoutFormExtension $form
+     * @param CheckoutFormInterface|CheckoutFormExtension $form
      * @param array $data
      */
-    public function beforeInitPayment(CheckoutForm $form, array $data): void
+    public function beforeInitPayment(CheckoutFormInterface $form, array $data): void
     {
         /** @var Order|OrderExtension $cart */
         $cart = $form->getCart();
@@ -67,10 +67,10 @@ class CheckoutFormRequestHandlerExtension extends Extension
 
     /**
      * @param array $data
-     * @param CheckoutForm $form
+     * @param CheckoutFormInterface $form
      * @return \SilverStripe\Control\HTTPResponse
      */
-    public function UpdateShipping(array $data, CheckoutForm $form): HTTPResponse
+    public function UpdateShipping(array $data, CheckoutFormInterface $form): HTTPResponse
     {
         $this->updateShippingAddOn($form->getCart(), intval($data[CheckoutFormExtension::SHIPPING_REGION_FIELD]),
             intval($data[CheckoutFormExtension::SHIPPING_SERVICE_FIELD]));

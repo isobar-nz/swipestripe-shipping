@@ -68,6 +68,7 @@ class ShippingService extends DataObject
 
     /**
      * @inheritdoc
+     * @codeCoverageIgnore
      */
     public function getCMSFields()
     {

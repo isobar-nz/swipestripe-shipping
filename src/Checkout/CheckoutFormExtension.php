@@ -8,7 +8,7 @@ use SilverStripe\Forms\CheckboxField;
 use SilverStripe\Forms\DropdownField;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\FormAction;
-use SwipeStripe\Order\Checkout\CheckoutForm;
+use SwipeStripe\Order\Checkout\CheckoutFormInterface;
 use SwipeStripe\Order\Order;
 use SwipeStripe\Shipping\Order\OrderExtension;
 use SwipeStripe\Shipping\ShippingRegion;
@@ -17,7 +17,7 @@ use SwipeStripe\Shipping\ShippingService;
 /**
  * Class CheckoutFormExtension
  * @package SwipeStripe\Shipping\Checkout
- * @property CheckoutForm|CheckoutFormExtension $owner
+ * @property CheckoutFormInterface|CheckoutFormExtension $owner
  */
 class CheckoutFormExtension extends Extension
 {

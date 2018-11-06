@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace SwipeStripe\Shipping\Checkout;
 
 use SilverStripe\Core\Extension;
-use SwipeStripe\Order\Checkout\CheckoutForm;
+use SwipeStripe\Order\Checkout\CheckoutFormInterface;
 use SwipeStripe\Order\Checkout\CheckoutFormValidator;
 use SwipeStripe\Shipping\ShippingRegion;
 use SwipeStripe\Shipping\ShippingService;
@@ -18,9 +18,9 @@ use SwipeStripe\Shipping\ShippingZone;
 class CheckoutFormValidatorExtension extends Extension
 {
     /**
-     * @param CheckoutForm|CheckoutFormExtension $form
+     * @param CheckoutFormInterface|CheckoutFormExtension $form
      */
-    public function beforeRequiredFields(CheckoutForm $form): void
+    public function beforeRequiredFields(CheckoutFormInterface $form): void
     {
         if (!$form->shippingAddressSameAsBillingAddress()) {
             $this->owner->addRequiredField(CheckoutFormExtension::SHIPPING_ADDRESS_FIELD . 'Street');
@@ -34,10 +34,10 @@ class CheckoutFormValidatorExtension extends Extension
     }
 
     /**
-     * @param CheckoutForm $form
+     * @param CheckoutFormInterface $form
      * @param array $data
      */
-    public function validate(CheckoutForm $form, array $data): void
+    public function validate(CheckoutFormInterface $form, array $data): void
     {
         $shippingRegionId = intval($data[CheckoutFormExtension::SHIPPING_REGION_FIELD]);
         $shippingServiceId = intval($data[CheckoutFormExtension::SHIPPING_SERVICE_FIELD]);
