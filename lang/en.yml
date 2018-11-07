@@ -1,0 +1,46 @@
+en:
+  SwipeStripe\Order\Includes\OrderDetailsSummary:
+    BILLING_ADDRESS: 'Billing Address'
+    DETAILS: Details
+    DOWNLOAD_RECEIPT_PDF: 'Download receipt (PDF)'
+    RECEIPT_AND_INVOICE: 'Receipt & Invoice'
+    SHIPPING_ADDRESS: 'Shipping Address'
+  SwipeStripe\Order\Includes\OrderDetailsSummary_Receipt:
+    BILLING_ADDRESS: 'Billing Address'
+    DETAILS: Details
+    SHIPPING_ADDRESS: 'Shipping Address'
+  SwipeStripe\Shipping\Checkout\CheckoutFormExtension:
+    SHIPPING_ADDRESS_SAME: 'Shipping address same as billing address'
+    SHIPPING_ADDRESS_TITLE: 'Shipping Address'
+    SHIPPING_REGION_TITLE: 'Shipping Region'
+    SHIPPING_SERVICE_TITLE: 'Shipping Service'
+    UPDATE_SHIPPING_ACTION: 'Update Shipping Costs'
+  SwipeStripe\Shipping\Checkout\CheckoutFormValidatorExtension:
+    SHIPPING_SERVICE_UNAVAILABLE: 'Sorry, {service} is not available in {region}.'
+  SwipeStripe\Shipping\Order\ShippingAddOn:
+    ORDER_ENTRY: 'Shipping - {service}'
+    PLURALNAME: 'Shipping Add Ons'
+    PLURALS:
+      one: 'A Shipping Add On'
+      other: '{count} Shipping Add Ons'
+    SINGULARNAME: 'Shipping Add On'
+  SwipeStripe\Shipping\ShippingAdmin:
+    MENUTITLE: Shipping
+  SwipeStripe\Shipping\ShippingRegion:
+    PLURALNAME: 'Shipping Regions'
+    PLURALS:
+      one: 'A Shipping Region'
+      other: '{count} Shipping Regions'
+    SINGULARNAME: 'Shipping Region'
+  SwipeStripe\Shipping\ShippingService:
+    PLURALNAME: 'Shipping Services'
+    PLURALS:
+      one: 'A Shipping Service'
+      other: '{count} Shipping Services'
+    SINGULARNAME: 'Shipping Service'
+  SwipeStripe\Shipping\ShippingZone:
+    PLURALNAME: 'Shipping Zones'
+    PLURALS:
+      one: 'A Shipping Zone'
+      other: '{count} Shipping Zones'
+    SINGULARNAME: 'Shipping Zone'

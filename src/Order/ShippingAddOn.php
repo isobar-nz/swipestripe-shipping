@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace SwipeStripe\Shipping\Order;
 
 use SwipeStripe\Order\OrderAddOn;
+use SwipeStripe\Order\OrderLockedException;
 use SwipeStripe\Price\DBPrice;
 use SwipeStripe\Shipping\ShippingRegion;
 use SwipeStripe\Shipping\ShippingZone;
@@ -39,7 +40,7 @@ class ShippingAddOn extends OrderAddOn
     public function updateWithZone(ShippingZone $shippingZone, int $regionId): self
     {
         if (!$this->Order()->IsMutable()) {
-            throw new \BadMethodCallException('Cart must be mutable to update shipping add-on.');
+            throw new OrderLockedException($this->Order());
         }
 
         $this->Title = _t(self::class . '.ORDER_ENTRY', 'Shipping - {service}', [
