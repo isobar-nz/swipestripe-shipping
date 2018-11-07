@@ -36,14 +36,17 @@ class CheckoutFormExtension extends Extension
 
         /** @var Order|OrderExtension $cart */
         $cart = $this->owner->getCart();
-        $fields->insertAfter(static::SHIPPING_ADDRESS_COPY_FIELD, $cart->ShippingAddress->scaffoldFormField());
+        $fields->insertAfter(static::SHIPPING_ADDRESS_COPY_FIELD, $cart->ShippingAddress->scaffoldFormField(
+            _t(self::class . '.SHIPPING_ADDRESS_TITLE', 'Shipping Address')));
 
         $shippingAddOn = $cart->getShippingAddOn();
         $fields->insertAfter(static::SHIPPING_ADDRESS_FIELD,
-            DropdownField::create(static::SHIPPING_REGION_FIELD, 'Shipping Region', ShippingRegion::get(),
+            DropdownField::create(static::SHIPPING_REGION_FIELD,
+                _t(self::class . '.SHIPPING_REGION_TITLE', 'Shipping Region'), ShippingRegion::get(),
                 $shippingAddOn->ShippingRegionID));
         $fields->insertAfter(static::SHIPPING_REGION_FIELD,
-            DropdownField::create(static::SHIPPING_SERVICE_FIELD, 'Shipping Service', ShippingService::get(),
+            DropdownField::create(static::SHIPPING_SERVICE_FIELD,
+                _t(self::class . '.SHIPPING_SERVICE_TITLE', 'Shipping Service'), ShippingService::get(),
                 $shippingAddOn->ShippingZone()->ShippingServiceID));
     }
 
@@ -52,7 +55,8 @@ class CheckoutFormExtension extends Extension
      */
     public function updateActions(FieldList $actions): void
     {
-        $actions->unshift(FormAction::create('UpdateShipping', 'Update Shipping Costs'));
+        $actions->unshift(FormAction::create('UpdateShipping',
+            _t(self::class . '.UPDATE_SHIPPING_ACTION', 'Update Shipping Costs')));
     }
 
     /**
