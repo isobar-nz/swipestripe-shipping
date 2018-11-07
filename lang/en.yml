@@ -1,4 +1,14 @@
 en:
+  SwipeStripe\Order\Includes\OrderDetailsSummary:
+    BILLING_ADDRESS: 'Billing Address'
+    DETAILS: Details
+    DOWNLOAD_RECEIPT_PDF: 'Download receipt (PDF)'
+    RECEIPT_AND_INVOICE: 'Receipt & Invoice'
+    SHIPPING_ADDRESS: 'Shipping Address'
+  SwipeStripe\Order\Includes\OrderDetailsSummary_Receipt:
+    BILLING_ADDRESS: 'Billing Address'
+    DETAILS: Details
+    SHIPPING_ADDRESS: 'Shipping Address'
   SwipeStripe\Shipping\Checkout\CheckoutFormExtension:
     SHIPPING_ADDRESS_SAME: 'Shipping address same as billing address'
     SHIPPING_ADDRESS_TITLE: 'Shipping Address'
