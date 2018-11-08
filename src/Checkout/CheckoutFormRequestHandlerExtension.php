@@ -26,7 +26,7 @@ class CheckoutFormRequestHandlerExtension extends Extension
      * @param CheckoutFormInterface|CheckoutFormExtension $form
      * @param array $data
      */
-    public function beforeInitPayment(CheckoutFormInterface $form, array $data): void
+    public function beforeConfirmCheckout(CheckoutFormInterface $form, array $data): void
     {
         /** @var Order|OrderExtension $cart */
         $cart = $form->getCart();
