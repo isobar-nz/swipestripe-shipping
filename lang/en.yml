@@ -10,7 +10,6 @@ en:
     DETAILS: Details
     SHIPPING_ADDRESS: 'Shipping Address'
   SwipeStripe\Shipping\Checkout\CheckoutFormExtension:
-    SHIPPING_ADDRESS_SAME: 'Shipping address same as billing address'
     SHIPPING_ADDRESS_TITLE: 'Shipping Address'
     SHIPPING_REGION_TITLE: 'Shipping Region'
     SHIPPING_SERVICE_TITLE: 'Shipping Service'

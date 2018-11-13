@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace SwipeStripe\Shipping\Checkout;
 
 use SilverStripe\Core\Extension;
-use SilverStripe\Forms\CheckboxField;
 use SilverStripe\Forms\DropdownField;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\FormAction;
@@ -21,7 +20,6 @@ use SwipeStripe\Shipping\ShippingService;
  */
 class CheckoutFormExtension extends Extension
 {
-    const SHIPPING_ADDRESS_COPY_FIELD = 'ShippingAddressSame';
     const SHIPPING_ADDRESS_FIELD = 'ShippingAddress';
     const SHIPPING_REGION_FIELD = 'ShippingRegion';
     const SHIPPING_SERVICE_FIELD = 'ShippingService';
@@ -31,12 +29,9 @@ class CheckoutFormExtension extends Extension
      */
     public function updateFields(FieldList $fields): void
     {
-        $fields->insertAfter('BillingAddress', CheckboxField::create(static::SHIPPING_ADDRESS_COPY_FIELD,
-            _t(self::class . '.SHIPPING_ADDRESS_SAME', 'Shipping address same as billing address'), true));
-
         /** @var Order|OrderExtension $cart */
         $cart = $this->owner->getCart();
-        $fields->insertAfter(static::SHIPPING_ADDRESS_COPY_FIELD, $cart->ShippingAddress->scaffoldFormField(
+        $fields->insertAfter('BillingAddress', $cart->ShippingAddress->scaffoldFormField(
             _t(self::class . '.SHIPPING_ADDRESS_TITLE', 'Shipping Address')));
 
         $shippingAddOn = $cart->getShippingAddOn();
@@ -57,13 +52,5 @@ class CheckoutFormExtension extends Extension
     {
         $actions->unshift(FormAction::create('UpdateShipping',
             _t(self::class . '.UPDATE_SHIPPING_ACTION', 'Update Shipping Costs')));
-    }
-
-    /**
-     * @return bool
-     */
-    public function shippingAddressSameAsBillingAddress(): bool
-    {
-        return boolval($this->owner->Fields()->dataFieldByName(static::SHIPPING_ADDRESS_COPY_FIELD)->dataValue());
     }
 }

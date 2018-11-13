@@ -28,15 +28,7 @@ class CheckoutFormRequestHandlerExtension extends Extension
      */
     public function beforeConfirmCheckout(CheckoutFormInterface $form, array $data): void
     {
-        /** @var Order|OrderExtension $cart */
-        $cart = $form->getCart();
-
-        // Order specific shipping address handled by saveInto()
-        if ($form->shippingAddressSameAsBillingAddress()) {
-            $cart->ShippingAddress->setValue($cart->BillingAddress);
-        }
-
-        $this->updateShippingAddOn($cart, intval($data[CheckoutFormExtension::SHIPPING_REGION_FIELD]),
+        $this->updateShippingAddOn($form->getCart(), intval($data[CheckoutFormExtension::SHIPPING_REGION_FIELD]),
             intval($data[CheckoutFormExtension::SHIPPING_SERVICE_FIELD]));
     }
 
