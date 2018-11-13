@@ -22,12 +22,10 @@ class CheckoutFormValidatorExtension extends Extension
      */
     public function beforeRequiredFields(CheckoutFormInterface $form): void
     {
-        if (!$form->shippingAddressSameAsBillingAddress()) {
-            $this->owner->addRequiredField(CheckoutFormExtension::SHIPPING_ADDRESS_FIELD . 'Street');
-            $this->owner->addRequiredField(CheckoutFormExtension::SHIPPING_ADDRESS_FIELD . 'City');
-            $this->owner->addRequiredField(CheckoutFormExtension::SHIPPING_ADDRESS_FIELD . 'PostCode');
-            $this->owner->addRequiredField(CheckoutFormExtension::SHIPPING_ADDRESS_FIELD . 'Country');
-        }
+        $this->owner->addRequiredField(CheckoutFormExtension::SHIPPING_ADDRESS_FIELD . 'Street');
+        $this->owner->addRequiredField(CheckoutFormExtension::SHIPPING_ADDRESS_FIELD . 'City');
+        $this->owner->addRequiredField(CheckoutFormExtension::SHIPPING_ADDRESS_FIELD . 'PostCode');
+        $this->owner->addRequiredField(CheckoutFormExtension::SHIPPING_ADDRESS_FIELD . 'Country');
 
         $this->owner->addRequiredField(CheckoutFormExtension::SHIPPING_REGION_FIELD);
         $this->owner->addRequiredField(CheckoutFormExtension::SHIPPING_SERVICE_FIELD);
