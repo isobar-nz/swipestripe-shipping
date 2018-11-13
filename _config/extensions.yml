@@ -4,16 +4,16 @@ Name: swipestripe-shipping-extensions
 
 SwipeStripe\Order\Checkout\CheckoutForm:
   extensions:
-  - SwipeStripe\Shipping\Checkout\CheckoutFormExtension
+    swipestripe-shipping: SwipeStripe\Shipping\Checkout\CheckoutFormExtension
 
 SwipeStripe\Order\Checkout\CheckoutFormValidator:
   extensions:
-  - SwipeStripe\Shipping\Checkout\CheckoutFormValidatorExtension
+    swipestripe-shipping: SwipeStripe\Shipping\Checkout\CheckoutFormValidatorExtension
 
 SwipeStripe\Order\Checkout\CheckoutFormRequestHandler:
   extensions:
-  - SwipeStripe\Shipping\Checkout\CheckoutFormRequestHandlerExtension
+    swipestripe-shipping: SwipeStripe\Shipping\Checkout\CheckoutFormRequestHandlerExtension
 
 SwipeStripe\Order\Order:
   extensions:
-  - SwipeStripe\Shipping\Order\OrderExtension
+    swipestripe-shipping: SwipeStripe\Shipping\Order\OrderExtension
