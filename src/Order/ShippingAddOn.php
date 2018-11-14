@@ -44,7 +44,7 @@ class ShippingAddOn extends OrderAddOn
         }
 
         $this->Title = _t(self::class . '.ORDER_ENTRY', 'Shipping - {service}', [
-            'service' => $shippingZone->ShippingService()->Title,
+            'service' => $shippingZone->Title,
         ]);
         $this->ShippingRegionID = $regionId;
         $this->ShippingZoneID = $shippingZone->ID;
