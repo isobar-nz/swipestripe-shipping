@@ -32,8 +32,9 @@ class ShippingZone extends DataObject
      * @var array
      */
     private static $db = [
-        'Price'     => 'Price',
-        'FreeOver'  => 'Price',
+        'Title'    => 'Varchar',
+        'Price'    => 'Price',
+        'FreeOver' => 'Price',
     ];
 
     /**
@@ -69,6 +70,7 @@ class ShippingZone extends DataObject
      * @var array
      */
     private static $searchable_fields = [
+        'Title',
         'ShippingService.Title',
         'ShippingRegions.Title',
     ];
@@ -77,6 +79,7 @@ class ShippingZone extends DataObject
      * @var array
      */
     private static $summary_fields = [
+        'Title'                 => 'Title',
         'ShippingService.Title' => 'Shipping Service',
         'Price.Value'           => 'Price',
         'ShippingRegions.Count' => 'Regions',
@@ -100,7 +103,7 @@ class ShippingZone extends DataObject
      */
     public function getTitle()
     {
-        return $this->ShippingService()->Title;
+        return $this->getField('Title') ?: $this->ShippingService()->Title;
     }
 
     /**
