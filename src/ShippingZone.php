@@ -150,9 +150,14 @@ class ShippingZone extends DataObject
         $orderSubTotal = $order->SubTotal()->getMoney();
         $zoneFreeOver = $this->FreeOver->getMoney();
 
-        return $zoneFreeOver->isPositive() && $orderSubTotal->greaterThanOrEqual($zoneFreeOver)
+        $price = $zoneFreeOver->isPositive() && $orderSubTotal->greaterThanOrEqual($zoneFreeOver)
             ? DBPrice::create_field(DBPrice::INJECTOR_SPEC,
                 new Money(0, $this->Price->getMoney()->getCurrency()))
             : $this->Price;
+
+
+        $this->extend('updatePriceForOrder', $price, $order);
+
+        return $price;
     }
 }
